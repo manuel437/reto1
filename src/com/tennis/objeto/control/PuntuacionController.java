@@ -27,12 +27,7 @@ public class PuntuacionController {
     public void mostrarPuntuacionTotal(){
         int i = 0;
         while( i < this.getPuntuacionRepository().getHistorialPuntuacion().size()){
-            if(this.getPuntuacionRepository().getHistorialPuntuacion().get(i).getPuntosA() >= 3 && this.getPuntuacionRepository().getHistorialPuntuacion().get(i).getPuntosB() >= 3){
-                this.getPuntuacionView().mostrarPuntuacionJuegoEmpate(this.getPuntuacionRepository().getHistorialPuntuacion().get(i));
-            }else{
-                this.getPuntuacionView().mostrarPuntuacionJuegoNormal(this.getPuntuacionRepository().getHistorialPuntuacion().get(i));
-
-            }
+            this.getPuntuacionView().mostrarPuntuacionPerfecto(this.puntuacionRepository.getHistorialPuntuacion().get(i));
             i++;
         }
     }
@@ -65,32 +60,34 @@ public class PuntuacionController {
             System.out.println("No se pudo anotar la puntuacion");
         }
 
-
-
-
+    }
+    public int comprobarFinal(Puntuacion puntuacion){
+        int resp = 0;
+        if(puntuacion.getPuntosA() >= 3 && puntuacion.getPuntosB() >= 3){
+             //desempate
+            if((puntuacion.getPuntosA() == (puntuacion.getPuntosB() +2)) || (puntuacion.getPuntosA() +2 == puntuacion.getPuntosB())){
+                resp = 1;
+            }
+        }else{
+            if((puntuacion.getPuntosA() == 4 && puntuacion.getPuntosB() < 4) || (puntuacion.getPuntosB() == 4 && puntuacion.getPuntosA() < 4)){
+                resp = 1;
+            }
+        }
+        return resp;
     }
 
     public void inicPartido() {
-        int punGan;
-        int flag = 0;
         this.getPuntuacionRepository().addPuntuacion(new Puntuacion());
+
         System.out.println("   P1   P2");
+
         do {
             this.ingresoPunto();
-            if(this.actualPuntuacionA() >= 3 && this.actualPuntuacionB() >= 3){
-                this.puntuacionView.mostrarPuntuacionJuegoEmpate(this.getPuntuacionRepository().lastPuntuacion());
-                if((this.actualPuntuacionA() == (this.actualPuntuacionB()+2)) || (this.actualPuntuacionA() == (this.actualPuntuacionB()-2))){
-                    flag = 1;
-                }
-            }else{
-                this.getPuntuacionView().mostrarPuntuacionJuegoNormal(this.getPuntuacionRepository().lastPuntuacion());
-                if(this.actualPuntuacionA() == 4 || this.actualPuntuacionA() == 4){
-                    flag = 1;
-                }
-            }
+            this.getPuntuacionView().mostrarPuntuacionPerfecto(this.getPuntuacionRepository().lastPuntuacion());
 
-
-        }while(flag == 0);
+        }while((this.comprobarFinal(this.getPuntuacionRepository().lastPuntuacion())) == 0);
+        System.out.println("Resumen del partido");
+        System.out.println("");
          this.mostrarPuntuacionTotal();
     }
 

@@ -44,8 +44,6 @@ public class Puntuacion {
         return puntosB;
     }
 
-    public void mostrarPuntuaciones(){
-        System.out.println("p1 " + this.puntosA + " - p2 " + this.puntosB);
-    }
+
 }
 

@@ -37,19 +37,19 @@ public class PuntuacionView {
         int gan = 0;
         if(pun.getPuntosA() == pun.getPuntosB()){
 
-            System.out.println("    Deuce  ");
+            System.out.println("|    Deuce    |");
         }else if(pun.getPuntosA() == (pun.getPuntosB() + 1)){
 
-            System.out.println("  Ventaja P1 ");
+            System.out.println("|  Ventaja P1 |");
         }else if(pun.getPuntosA() == (pun.getPuntosB() -1)){
 
-            System.out.println("  Ventaja P2 ");
+            System.out.println("|  Ventaja P2 |");
         }else if(pun.getPuntosA() == (pun.getPuntosB() + 2)){
 
-            System.out.println("    Gana P1  ");
+            System.out.println("|    Gana P1  |");
         }else if (pun.getPuntosA() == (pun.getPuntosB() - 2)){
 
-            System.out.println("    Gana P2  ");
+            System.out.println("|   Gana P2   |");
         }
 
     }
@@ -57,9 +57,9 @@ public class PuntuacionView {
 
             if(pun.getPuntosA() == 4 || pun.getPuntosB() == 4){
                 if(pun.getPuntosA() == 4){
-                    System.out.println("Gano P1");
+                    System.out.println("|    Gana P1  |");
                 }else{
-                    System.out.println("Gano P2");
+                    System.out.println("|    Gana P2   |");
                 }
 
             }else{
@@ -70,6 +70,13 @@ public class PuntuacionView {
                 System.out.println("");
 
             }
+    }
+    public void mostrarPuntuacionPerfecto(Puntuacion puntuacion){
+        if(puntuacion.getPuntosA() >= 3 && puntuacion.getPuntosB() >= 3){
+            this.mostrarPuntuacionJuegoEmpate(puntuacion);
+        }else{
+            this.mostrarPuntuacionJuegoNormal(puntuacion);
+        }
     }
 
 
