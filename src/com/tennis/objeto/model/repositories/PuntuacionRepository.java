@@ -11,6 +11,10 @@ public class PuntuacionRepository {
         this.historialPuntuacion = new ArrayList<>() ;
     }
 
+    public void setHistorialPuntuacion(ArrayList<Puntuacion> historialPuntuacion) {
+        this.historialPuntuacion = historialPuntuacion;
+    }
+
     public ArrayList<Puntuacion> getHistorialPuntuacion() {
         return historialPuntuacion;
     }

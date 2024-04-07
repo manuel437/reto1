@@ -4,6 +4,8 @@ import com.tennis.objeto.model.entity.Puntuacion;
 import com.tennis.objeto.model.repositories.PuntuacionRepository;
 import com.tennis.objeto.view.PuntuacionView;
 
+import java.util.ArrayList;
+
 public class PuntuacionController {
     private PuntuacionView puntuacionView;
     private PuntuacionRepository puntuacionRepository;
@@ -23,12 +25,16 @@ public class PuntuacionController {
     }
 
     public void mostrarPuntuacionTotal(){
-        int i = 0;
+        if(this.getPuntuacionRepository().getHistorialPuntuacion().size() != 0){
+            int i = 0;
 
-        System.out.println("| P1  V.S  P2 |");
-        while( i < this.getPuntuacionRepository().getHistorialPuntuacion().size()){
-            this.getPuntuacionView().mostrarPuntuacionPerfecto(this.puntuacionRepository.getHistorialPuntuacion().get(i));
-            i++;
+            System.out.println("| P1  V.S  P2 |");
+            while( i < this.getPuntuacionRepository().getHistorialPuntuacion().size()){
+                this.getPuntuacionView().mostrarPuntuacionPerfecto(this.puntuacionRepository.getHistorialPuntuacion().get(i));
+                i++;
+            }
+        }else{
+            System.out.println("No hay datos cargados");
         }
     }
 
@@ -79,8 +85,7 @@ public class PuntuacionController {
 
     public void inicPartido() {
         this.getPuntuacionRepository().addPuntuacion(new Puntuacion());
-
-        System.out.println("   P1   P2");
+        System.out.println("| P1  V.S  P2 |");
 
         do {
             this.ingresoPunto();
@@ -93,5 +98,17 @@ public class PuntuacionController {
         this.mostrarPuntuacionTotal();
     }
 
+    public void resetPartido(){
+
+        if(this.getPuntuacionRepository().getHistorialPuntuacion().size() != 0){
+            this.getPuntuacionRepository().setHistorialPuntuacion(new ArrayList<>());
+        }else{
+            System.out.println("No hay datos cargados");
+        }
+
+    }
+    public void endScannerUse(){
+        this.getPuntuacionView().getScanner().close();
+    }
 
 }
