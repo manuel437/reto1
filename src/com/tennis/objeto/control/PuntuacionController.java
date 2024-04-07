@@ -15,17 +15,17 @@ public class PuntuacionController {
 
     public int actualPuntuacionA() {
         return this.puntuacionRepository.getHistorialPuntuacion().getLast().getPuntosA();
-
     }
 
 
     public int actualPuntuacionB() {
         return this.puntuacionRepository.getHistorialPuntuacion().getLast().getPuntosB();
-
     }
 
     public void mostrarPuntuacionTotal(){
         int i = 0;
+
+        System.out.println("| P1  V.S  P2 |");
         while( i < this.getPuntuacionRepository().getHistorialPuntuacion().size()){
             this.getPuntuacionView().mostrarPuntuacionPerfecto(this.puntuacionRepository.getHistorialPuntuacion().get(i));
             i++;
@@ -61,6 +61,7 @@ public class PuntuacionController {
         }
 
     }
+
     public int comprobarFinal(Puntuacion puntuacion){
         int resp = 0;
         if(puntuacion.getPuntosA() >= 3 && puntuacion.getPuntosB() >= 3){
@@ -86,9 +87,10 @@ public class PuntuacionController {
             this.getPuntuacionView().mostrarPuntuacionPerfecto(this.getPuntuacionRepository().lastPuntuacion());
 
         }while((this.comprobarFinal(this.getPuntuacionRepository().lastPuntuacion())) == 0);
+        System.out.println("");
         System.out.println("Resumen del partido");
         System.out.println("");
-         this.mostrarPuntuacionTotal();
+        this.mostrarPuntuacionTotal();
     }
 
 

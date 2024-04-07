@@ -19,6 +19,7 @@ public class PuntuacionRepository {
     public void addPuntuacion(Puntuacion pun){
         this.historialPuntuacion.add(pun);
     }
+
     public Puntuacion lastPuntuacion(){
         return this.historialPuntuacion.getLast();
     }
